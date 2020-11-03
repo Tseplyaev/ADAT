@@ -1,9 +1,8 @@
 from aiida.orm import CalcJobNode, load_node
 from aiida.orm.querybuilder import QueryBuilder
-from aiida_fleur.calculation.fleur import FleurCalculation
 
 
-def find_nested_calcjob(wc_node):
+def find_nested_process(wc_node, p_class):
     '''
     This function finds all nested child FleurCalculations of the workchain
     '''
@@ -11,10 +10,10 @@ def find_nested_calcjob(wc_node):
     lower = wc_node.get_outgoing().all()
     for i in lower:
         if 'CALL' in i.link_label:
-            if i.node.process_class is FleurCalculation:
+            if i.node.process_class is p_class:
                 child_fleurcalcs.append(i.node)
             else:
-                child_fleurcalcs.extend(find_nested_calcjob(i.node))
+                child_fleurcalcs.extend(find_nested_process(i.node))
     return child_fleurcalcs
 
 def request_calcjobs():
