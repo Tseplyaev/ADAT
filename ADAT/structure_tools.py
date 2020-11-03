@@ -44,3 +44,9 @@ def redo_create_magnetic(optimized_structure, total_number_layers=13, num_relaxe
     res.label = film_name
     return (res.uuid)
 
+def get_substrate_number(element):
+    from aiida_fleur.tools.element_econfig_list import econfiguration
+    for i in econfiguration.keys():
+        if econfiguration[i]['symbol'] == element:
+            return i
+
