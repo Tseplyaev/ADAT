@@ -32,7 +32,8 @@ def request_calcjobs():
 
 def get_iterations_from_pk(wc_node):
     '''Prints out the total number of relaxation steps'''
-    pk_last = max(find_nested_calcjob(wc_node))
+    from aiida_fleur.calculation.fleur import FleurCalculation
+    pk_last = max(find_nested_process(wc_node, FleurCalculation))
     last_calcjob = load_node(pk_last)
     if 'relax_parameters' not in last_calcjob.outputs:
         return None
