@@ -13,7 +13,7 @@ def find_nested_process(wc_node, p_class):
             if i.node.process_class is p_class:
                 child_fleurcalcs.append(i.node)
             else:
-                child_fleurcalcs.extend(find_nested_process(i.node))
+                child_fleurcalcs.extend(find_nested_process(i.node, p_class))
     return child_fleurcalcs
 
 def request_calcjobs():
