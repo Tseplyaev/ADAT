@@ -13,7 +13,7 @@ def find_nested_process(wc_node, p_class):
     lower = wc_node.get_outgoing().all()
     for i in lower:
 	try:
-        if 'CALL' in i.link_label:
+            if 'CALL' in i.link_label:
                 if i.node.process_class is p_class:
                     child_fleurcalcs.append(i.node)
                 else:
